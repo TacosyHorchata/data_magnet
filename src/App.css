@@ -89,3 +89,15 @@ label[for="fileInput"] {
   margin-left: 4vw;
 
 }
+
+td{
+  border: 1px solid black;
+  padding: 1vw;
+}
+tr{
+  border: 1px solid black;
+}
+table{
+  border: 1px solid black;
+}
+

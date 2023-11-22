@@ -170,24 +170,33 @@ function App() {
       </div>
         <div className='col'>
           <h2>Datos Extraídos</h2>
-          {
-              Object.keys(extractedData).map((key, index) => (
-                <div key={index}>
-                  <strong>{key}: </strong>
-                  {typeof extractedData[key] === 'object' ? (
-                    <div>
-                      {Object.keys(extractedData[key]).map((innerKey, innerIndex) => (
-                        <label key={innerIndex}>
-                          {innerKey}: {extractedData[key][innerKey]}
-                        </label>
-                      ))}
-                    </div>
-                  ) : (
-                    <label>{extractedData[key]}</label>
-                  )}
-                </div>
-              ))
-            }
+          <table>
+            <tbody>
+              {Object.keys(extractedData).map((key, index) => (
+                <tr key={index}>
+                  <td>
+                    <strong>{key}</strong>
+                  </td>
+                  <td>
+                    {typeof extractedData[key] === 'object' ? (
+                      <table>
+                        <tbody>
+                          {Object.keys(extractedData[key]).map((innerKey, innerIndex) => (
+                            <tr key={innerIndex}>
+                              <td>{innerKey}</td>
+                              <td>{extractedData[key][innerKey]}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <label>{extractedData[key]}</label>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
       <br/>
