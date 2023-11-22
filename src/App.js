@@ -39,38 +39,38 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     const searchObject = searchFields.reduce((acc, curr) => {
       if (curr.key !== '') {
         acc[curr.key] = curr.description;
       }
       return acc;
     }, {});
-  
+
     console.log('Search Object:', searchObject);
     console.log('Uploaded Files:', files);
-  
+
     const formData = new FormData();
     formData.append('file', files[0]); // Assuming one file is being uploaded
     formData.append('output_json', JSON.stringify(searchObject));
-  
+
     try {
       const processFileResponse = await axios.post('https://camtom-docs-70b844df7cdc.herokuapp.com/process-file', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-  
+
       const jobId = processFileResponse.data.job_id;
       console.log(processFileResponse.data, jobId)
-  
+
       let jobStatus = 'PENDING';
-  
+
       while (jobStatus !== 'finished' && jobStatus !== 'failed' && jobStatus !== 'stopped') {
         const jobStatusResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-status/${jobId}`);
         jobStatus = jobStatusResponse.data.status;
         console.log(jobStatusResponse.data, jobStatus)
-  
+
         if (jobStatus === 'finished') {
           const jobResultResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-result/${jobId}`);
           const jobResult = jobResultResponse.data.result;
@@ -87,33 +87,32 @@ function App() {
       }
     } catch (error) {
       console.error('Error:', error);
+      // Display error if there's an issue
+      alert('Error occurred while processing. Please try again.');
     }
-  
+
     setIsLoading(false);
   };
-  
+
 
   const isAddButtonDisabled = searchFields.length >= 10;
 
 
   return (
-    <div class="container">
-    <h1>Data Magnet 🧲 <i>Beta 1.0</i></h1>
-    <h3>Data Magnet te permite extraer datos relevantes de tus documentos de manera sencilla y rápida. 
-      Ahorrando interminables horas de captura y papeleo.
-    </h3>
-    <p>
-      1. Sube tu archivo.
-      <br/>2. Especifica los datos que estás buscando.
-      <br/>3. Agrega descripciónes a cada dato para que Data Magnet encuentre mejores resultados.
-      <br/>4. Exporta en formato CSV o JSON.
-      <br/>
-      <br/><i>Convierte multiples archivos simultaneamente(Proximamente)</i>
-      <br/><i>Guarda los datos que deseas extraer en tus "Asistentes"(Proximamente)</i>
-      <br/><i>Conecta a Google Sheets o a través de la API (Proximamente)</i>
-      
-
-      
+    <div className="container">
+      <h1>Data Magnet 🧲 <i>Beta 1.0</i></h1>
+      <h3>Data Magnet allows you to extract relevant data from your documents easily and quickly.
+        Saving endless hours of manual data entry and paperwork.
+      </h3>
+      <p>
+        1. Upload your file.
+        <br />2. Specify the data you are looking for.
+        <br />3. Add descriptions to each data for better results.
+        <br />4. Export in CSV or JSON format.
+        <br />
+        <br /><i>Convert multiple files simultaneously (Coming Soon)</i>
+        <br /><i>Save the data you wish to extract in your "Assistants" (Coming Soon)</i>
+        <br /><i>Connect to Google Sheets or via API (Coming Soon)</i>
       </p>
       <div className='row'>
         <div className='col'>
@@ -127,15 +126,15 @@ function App() {
               id="fileInput"
             />
             {files.length > 0 && (
-                <div>
-                  <h4>Uploaded Files:</h4>
-                  <ul>
-                    {files.map((file, index) => (
-                      <li key={index}>{file.name}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div>
+                <h4>Uploaded Files:</h4>
+                <ul>
+                  {files.map((file, index) => (
+                    <li key={index}>{file.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {searchFields.map((field, index) => (
               <div key={index}>
                 <input
@@ -153,23 +152,25 @@ function App() {
                   onChange={(e) => handleInputChange(index, e)}
                 />
                 {index > 0 && (
-                  <button type="button" onClick={() => removeInputField(index)}>
+                  <button type="button" onClick={() => removeInputField(index)}
+                  style={{backgroundColor:'red'}}
+                  >
                     Remove
                   </button>
                 )}
               </div>
             ))}
             <button type="button" onClick={addInputField} disabled={isAddButtonDisabled}>
-              Agrega datos
+              Add Data
             </button>
-          
-            <button type="submit" disabled={isLoading}>Convertir</button>
-            {isLoading && <p>Extrayendo datos, no cierre esta pestaña</p>}
-            
+
+            <button type="submit" disabled={isLoading} style={{backgroundColor:'blue', width:'10vw'}}>Convert</button>
+            {isLoading && <p>Extracting data, please do not close this tab...</p>}
+
           </form>
-      </div>
+        </div>
         <div className='col'>
-          <h2>Datos Extraídos</h2>
+          <h2>Extracted Data</h2>
           <table>
             <tbody>
               {Object.keys(extractedData).map((key, index) => (
@@ -199,14 +200,12 @@ function App() {
           </table>
         </div>
       </div>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };
 
 export default App;
-
-

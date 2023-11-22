@@ -101,3 +101,8 @@ table{
   border: 1px solid black;
 }
 
+button[type="submit"][disabled] {
+  background-color: lightgray!important;  /* Change the color to a light gray when disabled */
+  width: 10vw; /* Set the width of the button */
+  /* Add more styles as needed */
+}
