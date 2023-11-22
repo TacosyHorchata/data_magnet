@@ -105,12 +105,13 @@ function App() {
         Saving endless hours of manual data entry and paperwork.
       </h3>
       <p>
-        1. Upload your file.
+        1. Upload your PDF file.
         <br />2. Specify the data you are looking for.
         <br />3. Add descriptions to each data for better results.
         <br />4. Export in CSV or JSON format.
         <br />
         <br /><i>Convert multiple files simultaneously (Coming Soon)</i>
+        <br /><i>Upload images or .docx(Coming Soon)</i>
         <br /><i>Save the data you wish to extract in your "Assistants" (Coming Soon)</i>
         <br /><i>Connect to Google Sheets or via API (Coming Soon)</i>
       </p>
