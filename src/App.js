@@ -118,7 +118,7 @@ function App() {
       <div className='row'>
         <div className='col'>
           <form onSubmit={handleSubmit} id="searchForm" onDrop={handleFileDrop} encType="multipart/form-data">
-            <label htmlFor="fileInput">Click to Upload Files or Drag & Drop Here</label>
+            <label htmlFor="fileInput">Click to upload your PDF</label>
             <input
               type="file"
               onChange={handleFileInputChange}
