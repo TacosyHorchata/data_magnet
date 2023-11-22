@@ -61,6 +61,11 @@ function App() {
         }
       });
 
+      if(processFileResponse.data.error){
+        alert(processFileResponse.data.error);
+        setIsLoading(false);
+        return
+      }
       const jobId = processFileResponse.data.job_id;
       console.log(processFileResponse.data, jobId)
 
