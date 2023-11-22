@@ -39,35 +39,59 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
+  
     const searchObject = searchFields.reduce((acc, curr) => {
       if (curr.key !== '') {
         acc[curr.key] = curr.description;
       }
       return acc;
     }, {});
-
+  
     console.log('Search Object:', searchObject);
     console.log('Uploaded Files:', files);
-
+  
     const formData = new FormData();
     formData.append('file', files[0]); // Assuming one file is being uploaded
     formData.append('output_json', JSON.stringify(searchObject));
-
+  
     try {
-      const response = await axios.post('http://127.0.0.1:5000/process-file', formData, {
+      const processFileResponse = await axios.post('https://camtom-docs-70b844df7cdc.herokuapp.com/process-file', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-
-      setExtractedData(response.data.message)
-
+  
+      const jobId = processFileResponse.data.job_id;
+      console.log(processFileResponse.data, jobId)
+  
+      let jobStatus = 'PENDING';
+  
+      while (jobStatus !== 'finished' && jobStatus !== 'failed' && jobStatus !== 'stopped') {
+        const jobStatusResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-status/${jobId}`);
+        jobStatus = jobStatusResponse.data.status;
+        console.log(jobStatusResponse.data, jobStatus)
+  
+        if (jobStatus === 'finished') {
+          const jobResultResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-result/${jobId}`);
+          const jobResult = jobResultResponse.data.result;
+          console.log('Job Result:', jobResult);
+          // Handle the successful job result here
+          setExtractedData(jobResult);
+        } else if (jobStatus === 'FAILED' || jobStatus === 'STOPPED') {
+          // Handle failure or stopped job here
+          console.error('Job failed or stopped.');
+        } else {
+          // Job is still in progress, wait for some time before checking again
+          await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds
+        }
+      }
     } catch (error) {
       console.error('Error:', error);
     }
-    setIsLoading(false)
+  
+    setIsLoading(false);
   };
+  
 
   const isAddButtonDisabled = searchFields.length >= 10;
 
