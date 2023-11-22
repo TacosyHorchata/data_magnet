@@ -165,7 +165,7 @@ function App() {
             </button>
 
             <button type="submit" disabled={isLoading} style={{backgroundColor:'blue', width:'10vw'}}>Convert</button>
-            {isLoading && <p>Extracting data, please do not close this tab...</p>}
+            {isLoading && <p>Extracting data, this make take a while, please do not close this tab...</p>}
 
           </form>
         </div>
