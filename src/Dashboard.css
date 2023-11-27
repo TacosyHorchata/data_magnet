@@ -49,6 +49,10 @@
     margin-right: 10px;
   }
   
+  .brand{
+    font-size:2em;
+  }
+
   .header {
     font-size: 4em;
     margin: 0 0 0.5em 0;
@@ -61,7 +65,7 @@
   
   input,
   button {
-    padding: 0.75em;
+    padding: 2em;
     border: none;
     margin-right: 0.5em;
     border-radius: 5px;
@@ -72,7 +76,8 @@
   }
   
   button {
-    background-color: #6c5ce7;
+    background-color: #000000;
+    border: 1px solid rgb(189, 189, 189);
     color: white;
     cursor: pointer;
   }
@@ -120,7 +125,7 @@
     /* Add styles for your select button */
     /* For example: */
     margin-top: 20px;
-    padding: 10px 20px;
+    padding: 1.5em;
     background-color: #6c5ce7;
     color: white;
     border: none;
@@ -178,11 +183,16 @@
         width: auto;
         margin-right: 10px;
       }
+
+      .brand{
+        font-size: 1.5em;
+      }
       
       .header {
-        font-size: 4em;
+        font-size: 2em;
         margin: 0 0 0.5em 0;
       }
+
       
       .description {
         font-size: 1.25em;
@@ -191,9 +201,8 @@
       
       input,
       button {
-        padding: 0.75em;
+        padding: 1.5em;
         border: none;
-        margin-right: 0.5em;
         border-radius: 5px;
       }
       
@@ -202,14 +211,22 @@
       }
       
       button {
-        background-color: #6c5ce7;
+        background-color: #000000;
+        border: 1px solid rgb(189, 189, 189);
         color: white;
         cursor: pointer;
       }
       
       .input-group {
-        display: flex;
         margin-bottom: 1em;
+      }
+
+      .input-group input {
+        margin-bottom: 1em;
+        width: 86.5%;
+      }
+      .input-group button {
+        width: 100%;
       }
       
       /* Additional CSS for code formatting */
@@ -231,7 +248,7 @@
       /* Add styles for your select button */
       /* For example: */
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 1.5em;
       background-color: #6c5ce7;
       color: white;
       border: none;

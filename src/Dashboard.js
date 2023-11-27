@@ -144,15 +144,17 @@ const Dashboard = () => {
             <div className="left-panel">
                 <div className="logo">
                 {/* Replace with your actual logo image */}
-                <b style={{fontSize:'40px', fontFamily:'sans-serif'}}>Data Magnet 🧲</b>
+                <b className='brand'>Data Magnet 🧲</b>
                 </div>
                 <h1 className="header">Unlock the power of your Document's Data</h1>
                 <p className="description">
-                • Extract valuable insights from documents and convert them into actionable JSON or SQL 
+                • Save endless hours of data entry.
                 <br/>
-                • Empower your business decisions with enriched data
                 <br/>
-                • Save endless hours of data entry
+                • Empower your business decisions with enriched data.
+                <br/>
+                <br/>
+                • Extract valuable insights from documents and convert them into actionable JSON, SQL or CSV. 
                 </p>
                 <div className="input-group">
                 <input type="email" placeholder="Email" onChange={handleInputChange}/>
@@ -160,11 +162,12 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="right-panel">
+              <h1>Examples</h1>
                 <select className="select-dropdown" onChange={(e) => handleCardSelection(e.target.value)}>
-                    <option value="Invoice" selected>Invoice</option>
-                    <option value="Financial">Financial</option>
-                    <option value="Medical">Medical</option>
-                    <option value="Resume">Resume</option>
+                    <option value="Invoice" selected>Invoice Extraction</option>
+                    <option value="Financial">Financial Extraction</option>
+                    <option value="Medical">Medical Extraction</option>
+                    <option value="Resume">Resume Extraction</option>
                 </select>
                 <div className="code-mockup">
                     <pre>
