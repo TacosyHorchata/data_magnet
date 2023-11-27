@@ -146,7 +146,7 @@ const Dashboard = () => {
                 {/* Replace with your actual logo image */}
                 <b className='brand'>Data Magnet 🧲</b>
                 </div>
-                <h1 className="header">Unlock the power of your Document's Data</h1>
+                <h1 className="header">Unlock the power of your Documents Data</h1>
                 <p className="description">
                 • Save endless hours of data entry.
                 <br/>
