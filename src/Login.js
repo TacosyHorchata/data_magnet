@@ -6,6 +6,7 @@ import {auth} from "./firebase.js";
 import { useAuth } from './Context/authContext';
 import { useNavigate } from 'react-router-dom'; 
 import './Login.css'; // Import the CSS file
+import logo_bn from './images/logo-lookup-data-magnet-blanco.svg' 
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -36,7 +37,7 @@ const Login = () => {
 
   return (
     <>
-    <h1 style={{margin:"5vw 5vw"}}><a href='/'>Data Magnet 🧲</a></h1>
+    <img onClick={()=>navigate('/')} style={{margin:"2vw 0 0 3vw", width:"250px"}} src={logo_bn} class='brand'/>
     <div className='Login'>
         <div className="login-container">
         <h2>Login</h2>

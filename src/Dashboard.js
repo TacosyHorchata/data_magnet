@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { database } from './firebase.js';
 import { ref, push } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
+import logo_bn from './images/logo-lookup-data-magnet-blanco.svg' 
 
 import './Dashboard.css'
 import './Header.css'
@@ -145,7 +146,7 @@ const Dashboard = () => {
   <div className='Dashboard'>
     <div className='container'>
         <header class="Header">
-          <b class='brand'>Data Magnet 🧲</b>
+          <img src={logo_bn} class='brand'/>
           <nav>
             <ul>
               <li><a onClick={()=>navigate('/login')}>Login</a></li>

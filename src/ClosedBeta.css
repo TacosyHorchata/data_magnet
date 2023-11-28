@@ -160,6 +160,10 @@
   text-align: right;
 }
 
+.ClosedBeta .brand{
+  width: 250px;
+}
+
 @media screen and (max-width: 1000px) {
 
   .ClosedBeta .row{
@@ -199,6 +203,10 @@
     padding: 8px;
     border: none;
     margin-left: 40%;
+  }
+
+  .ClosedBeta .brand{
+    width: 200px;
   }
 
 }

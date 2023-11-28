@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useAuth } from './Context/authContext';
 import { useNavigate } from 'react-router-dom'; 
 
+import logo_bn from './images/logo-lookup-data-magnet-blanco.svg'
+
 const ClosedBeta = () => {
   const [searchFields, setSearchFields] = useState([{ key: '', description: '' }]);
   const [files, setFiles] = useState([]);
@@ -125,7 +127,7 @@ const ClosedBeta = () => {
   return (
     <div className="container-closedBeta ClosedBeta">
       <header class="Header">
-          <b class='brand'><a onClick={()=>navigate('/')}>Data Magnet 🧲</a></b>
+          <img onClick={()=>navigate('/')} src={logo_bn} class='brand'/> 
           <nav>
             <ul>
               <li><a onClick={handleLogout}>Logout</a></li>
