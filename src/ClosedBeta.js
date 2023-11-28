@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
-import './OpenBeta.css'
+import './ClosedBeta.css'
 import axios from 'axios';
 
-const OpenBeta = () => {
+import { useAuth } from './Context/authContext';
+import { useNavigate } from 'react-router-dom'; 
+
+const ClosedBeta = () => {
   const [searchFields, setSearchFields] = useState([{ key: '', description: '' }]);
   const [files, setFiles] = useState([]);
   const [extractedData, setExtractedData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
+  const [typeOutput, setTypeOutput] = useState('json')
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleTypeSelection = (event) =>{
+    setTypeOutput(event.target.value)
+  }
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -36,6 +46,15 @@ const OpenBeta = () => {
     setFiles(selectedFiles);
   };
 
+  const handleLogout = () => {
+    const confirmLogout = window.confirm('Are you sure you want to logout?');
+  
+    if (confirmLogout) {
+      logout();
+      navigate('/');
+    }
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -104,8 +123,17 @@ const OpenBeta = () => {
 
 
   return (
-    <div className="container-openbeta OpenBeta">
-      <h1>Data Magnet 🧲 <i>Beta 1.0</i></h1>
+    <div className="container-closedBeta ClosedBeta">
+      <header class="Header">
+          <b class='brand'><a onClick={()=>navigate('/')}>Data Magnet 🧲</a></b>
+          <nav>
+            <ul>
+              <li><a onClick={handleLogout}>Logout</a></li>
+            </ul>
+          </nav>
+        </header>
+      <h1><i>Beta 1.0</i></h1>
+      <i>If you are here, it means you are one of the choosen, choose your next steps wisely</i>
       <h3>Data Magnet allows you to extract relevant data from your documents easily and quickly.
         Saving endless hours of manual data entry and paperwork.
       </h3>
@@ -123,6 +151,7 @@ const OpenBeta = () => {
       <div className='row'>
         <div className='col'>
           <form onSubmit={handleSubmit} id="searchForm" onDrop={handleFileDrop} encType="multipart/form-data">
+            <h3><i>1. Upload your PDF file:</i></h3>
             <label htmlFor="fileInput">Click to upload your PDF</label>
             <input
               type="file"
@@ -141,6 +170,8 @@ const OpenBeta = () => {
                 </ul>
               </div>
             )}
+            <h3><i>2. Specify the data you are looking for.</i></h3>
+            <h3><i>3. Add descriptions to each data for better results.</i></h3>
             {searchFields.map((field, index) => (
               <div key={index}>
                 <input
@@ -158,24 +189,22 @@ const OpenBeta = () => {
                   onChange={(e) => handleInputChange(index, e)}
                 />
                 {index > 0 && (
-                  <button type="button" onClick={() => removeInputField(index)}
-                  style={{backgroundColor:'red'}}
-                  >
+                  <button type="button" className='button-remove' onClick={() => removeInputField(index)}>
                     Remove
                   </button>
                 )}
               </div>
             ))}
-            <button type="button" onClick={addInputField} disabled={isAddButtonDisabled}>
-              Add Data
+            <button type="button" className='button-add' onClick={addInputField} disabled={isAddButtonDisabled}>
+              Add Fields
             </button>
-
-            <button type="submit" disabled={isLoading} style={{backgroundColor:'blue', width:'10vw'}}>Convert</button>
+            <h3><i>4. Export in JSON format.</i></h3>
+            <button type="submit" className='button-convert' disabled={isLoading}>Convert to JSON</button>
             {isLoading && <p>Extracting data, this make take a while, please do not close this tab...</p>}
 
           </form>
         </div>
-        <div className='col'>
+        {/*<div className='col'>
           <h2>Extracted Data</h2>
           <table>
             <tbody>
@@ -204,6 +233,26 @@ const OpenBeta = () => {
               ))}
             </tbody>
           </table>
+                    </div>*/}
+
+        <div className='col'>
+          <div className="right-panel">
+            <h2>Extracted Data</h2>
+            <select className="select-dropdown" onChange={(e) => handleTypeSelection(e)}>
+              <option value="json" selected>JSON</option>
+            </select>
+            <div className="code-mockup">
+              <pre>
+                {/* Check the displayType state and show JSON or Text accordingly */}
+                {typeOutput === 'json' ? (
+                  Object.keys(extractedData).length === 0 ? ('{}') : (String(extractedData))
+                ) : (
+                  // Assuming extractedData is an object, you can display [object Object] as text
+                  null
+                )}
+              </pre>
+            </div>
+          </div>
         </div>
       </div>
       <br />
@@ -214,4 +263,4 @@ const OpenBeta = () => {
   );
 };
 
-export default OpenBeta;
+export default ClosedBeta;

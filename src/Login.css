@@ -1,0 +1,55 @@
+/* Login.css */
+
+    .Login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Take full viewport height */
+  }
+  
+  .login-container {
+    width: 300px;
+    padding: 3vw;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+.Login .form-group {
+    margin-bottom: 15px;
+  }
+  
+.Login label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+.Login input[type='email'],
+  input[type='password'] {
+    width: 270px;
+    padding: 12px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+.Login .btn-login {
+    background-color: #000000;
+    border: 1px solid rgb(189, 189, 189);
+    color: white;
+    cursor: pointer;
+    padding: 2em;
+    margin-right: 0.5em;
+    border-radius: 5px;
+    width: 296px;
+  }
+  
+.Login .btn-login:hover {
+    background-color: #222222;
+  }
+  
+.Login .error-message {
+    color: #ff0000;
+    margin-top: 10px;
+  }
+ 
+  

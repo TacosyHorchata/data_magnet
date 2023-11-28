@@ -1,28 +1,33 @@
-  
-  
-@media screen and (min-width: 768px) {
+a{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
 
-  body {
-    height: 100vh;
-    color: white;
-    background-color: #282c34;
-  }
+body {
+  height: 100vh;
+  color: white;
+  background-color: #282c34;
+}
+
+
+@media screen and (min-width: 768px) {
   
-  .container {
+  .Dashboard .container {
     padding: 3vw;
   }
 
-  .first-block{
+  .Dashboard .first-block{
     display: flex;
   }
   
-  .left-panel {
+  .Dashboard .left-panel {
     flex:1; 
     padding: 2em;
     flex-grow: 1;
   }
   
-  .right-panel {
+  .Dashboard .right-panel {
     flex:1; 
     background-color: #1e1e1e;
     padding: 2em;
@@ -31,75 +36,75 @@
     justify-content: center;
   }
   
-  .code-mockup {
+  .Dashboard .code-mockup {
     background-color: #1e1e1e;
     padding: 1em;
     border-radius: 5px;
   }
   
-  .logo {
+  .Dashboard .logo {
     display: flex;
     align-items: center;
     margin-bottom: 1em;
   }
   
-  .logo img {
+  .Dashboard .logo img {
     height: 50px;
     width: auto;
     margin-right: 10px;
   }
   
-  .brand{
+  .Dashboard .brand{
     font-size:2em;
   }
 
-  .header {
+  .Dashboard .header {
     font-size: 4em;
     margin: 0 0 0.5em 0;
   }
   
-  .description {
+  .Dashboard .description {
     font-size: 1.25em;
     margin-bottom: 2em;
   }
   
-  input,
-  button {
+  .Dashboard input,
+  .Dashboard button {
     padding: 2em;
     border: none;
     margin-right: 0.5em;
     border-radius: 5px;
   }
   
-  input {
+  .Dashboard input {
     flex-grow: 1;
   }
   
-  button {
+  .Dashboard button {
     background-color: #000000;
     border: 1px solid rgb(189, 189, 189);
     color: white;
     cursor: pointer;
   }
   
-  .input-group {
+  .Dashboard .input-group {
     display: flex;
     margin-bottom: 1em;
   }
   
   /* Additional CSS for code formatting */
-  pre {
+  .Dashboard pre {
     color: #71f1b6;
     margin: 0;
     overflow-x: auto;
   }
   
-  .card-container {
+  .Dashboard .card-container {
     display: flex;
     margin-top: 5vw;
   }
   
-  .card {
+  .Dashboard .card {
     flex: 1;
     background-color: #6c5ce7;
     border-radius: 10px;
@@ -110,17 +115,17 @@
     cursor: pointer;
   }
   
-  .card-title {
+  .Dashboard .card-title {
     font-size: 1.5em;
     margin-top: 0;
   }
   
-  .card-description {
+  .Dashboard .card-description {
     font-size: 1em;
     color: white;
   }
 
-  .select-dropdown {
+  .Dashboard .select-dropdown {
     display: block; /* Adjust the display property based on your specific mobile design */
     /* Add styles for your select button */
     /* For example: */
@@ -131,33 +136,34 @@
     border: none;
     border-radius: 5px;
   }
+  
 
 }
 
 @media screen and (max-width: 767px) {
     /* Changes specific to mobile screens */
   
-    .first-block {
+    .Dashboard .first-block {
       display: block; /* Remove flex for mobile */
     }
 
-    body {
+    .Dashboard body {
         height: 100vh;
         color: white;
         background-color: #282c34;
       }
       
-    .container {
+      .Dashboard .container {
         padding: 3vw;
     }
       
-      .left-panel {
+    .Dashboard .left-panel {
         flex:1; 
         padding: 2em;
         flex-grow: 1;
       }
       
-      .right-panel {
+      .Dashboard .right-panel {
         flex:1; 
         background-color: #1e1e1e;
         padding: 2em;
@@ -166,84 +172,84 @@
         justify-content: center;
       }
       
-      .code-mockup {
+      .Dashboard .code-mockup {
         background-color: #1e1e1e;
         padding: 1em;
         border-radius: 5px;
       }
       
-      .logo {
+      .Dashboard .logo {
         display: flex;
         align-items: center;
         margin-bottom: 1em;
       }
       
-      .logo img {
+      .Dashboard .logo img {
         height: 50px;
         width: auto;
         margin-right: 10px;
       }
 
-      .brand{
+      .Dashboard .brand{
         font-size: 1.5em;
       }
       
-      .header {
+      .Dashboard .header {
         font-size: 2em;
         margin: 0 0 0.5em 0;
       }
 
       
-      .description {
+      .Dashboard .description {
         font-size: 1.25em;
         margin-bottom: 2em;
       }
       
-      input,
-      button {
+      .Dashboard input,
+      .Dashboard button {
         padding: 1.5em;
         border: none;
         border-radius: 5px;
       }
       
-      input {
+      .Dashboard input {
         flex-grow: 1;
       }
       
-      button {
+      .Dashboard button {
         background-color: #000000;
         border: 1px solid rgb(189, 189, 189);
         color: white;
         cursor: pointer;
       }
       
-      .input-group {
+      .Dashboard .input-group {
         margin-bottom: 1em;
       }
 
-      .input-group input {
+      .Dashboard .input-group input {
         margin-bottom: 1em;
         width: 86.5%;
       }
-      .input-group button {
+      .Dashboard .input-group button {
         width: 100%;
       }
       
       /* Additional CSS for code formatting */
-      pre {
+      .Dashboard pre {
         color: #71f1b6;
         margin: 0;
         overflow-x: auto;
       }
   
     /* Hide card-container for mobile */
-    .card-container {
+    .Dashboard .card-container {
       display: none;
       
     }
   
     /* Show select button for mobile */
-    .select-dropdown {
+    .Dashboard .select-dropdown {
       display: block; /* Adjust the display property based on your specific mobile design */
       /* Add styles for your select button */
       /* For example: */

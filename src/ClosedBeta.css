@@ -1,0 +1,201 @@
+/* CSS for the form */
+
+.ClosedBeta form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.ClosedBeta input[type="text"] {
+  margin: 5px 5px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.ClosedBeta .button-add {
+  margin: 10px 0;
+  width: 80%;
+  padding: 1em;
+  background-color: #6c5ce7;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.ClosedBeta .button-convert {
+  background-color: #000000;
+  border: 1px solid rgb(189, 189, 189);
+  color: white;
+  cursor: pointer;
+  padding: 2em;
+  margin-right: 0.5em;
+  border-radius: 5px;
+}
+
+.ClosedBeta .button-remove{
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  padding: 8px;
+  border: none;
+}
+
+
+.ClosedBeta input[type="file"] {
+  display: none;
+}
+
+.ClosedBeta label[for="fileInput"] {
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  width: 80%;
+  height: 50px;
+}
+
+.ClosedBeta label[for="fileInput"]:hover {
+  background-color: #1e1e1e;
+}
+
+/* Highlight drag over effect */
+
+.ClosedBeta label[for="fileInput"].dragover {
+  background-color: #e1ecf4;
+  border-color: #66afe9;
+}
+
+/* CSS for the form */
+
+.container-closedBeta {
+  display: flex;
+  flex-direction: column;
+  margin: 3vw;
+}
+
+.ClosedBeta h1 {
+  text-align: center;
+}
+
+.ClosedBeta label[for="fileInput"] {
+  /* Your existing styles for drag and drop input */
+  /* Add additional styling if required */
+  /* Example: */
+  margin: 20px 0;
+  padding: 15px;
+  border: 2px dashed #ccc;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ClosedBeta .row{
+  display: flex;
+}
+.ClosedBeta .col{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 4vw;
+
+}
+
+.ClosedBeta td{
+  border: 1px solid black;
+  padding: 1vw;
+}
+.ClosedBeta tr{
+  border: 1px solid black;
+}
+.ClosedBeta table{
+  border: 1px solid black;
+}
+
+.ClosedBeta button[type="submit"][disabled] {
+  background-color: rgb(87, 87, 87)!important;  /* Change the color to a light gray when disabled */
+  color: white;
+  padding: 2em;
+  margin-right: 0.5em;
+  border-radius: 5px;
+}
+
+/* Additional CSS for code formatting */
+.ClosedBeta pre {
+  font-size: 1.3em;
+  color: #71f1b6;
+  margin: 2vh 0 0 0;
+  overflow-x: auto;
+}
+
+.ClosedBeta .right-panel {
+  flex:1; 
+  background-color: #1e1e1e;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  max-width: 35vw;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.ClosedBeta .select-dropdown {
+  display: block; /* Adjust the display property based on your specific mobile design */
+  /* Add styles for your select button */
+  /* For example: */
+  margin-top: 20px;
+  padding: 1.5em;
+  background-color: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+
+  .ClosedBeta .row{
+    display: block;
+  }
+
+  .ClosedBeta .col{
+    margin-top: 3vh;
+    flex-direction: column;
+  
+  }
+
+  .ClosedBeta .right-panel {
+    flex:1; 
+    margin-left: 3vw;
+    background-color: #1e1e1e;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    min-width: 70%;
+    max-width: 70%;
+    overflow-y: auto;
+  }
+
+  .ClosedBeta input[type="text"] {
+    margin: 5px 5px;
+    width: 40%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .ClosedBeta .button-remove{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    border: none;
+    margin-left: 40%;
+  }
+
+}
+

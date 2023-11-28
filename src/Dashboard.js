@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { database } from './firebase.js';
 import { ref, push } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
 
 import './Dashboard.css'
+import './Header.css'
 
 const Dashboard = () => {
   const [email, setEmail] = useState('');
   const [selectedCard, setSelectedCard] = useState(null);
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     setEmail(e.target.value);
@@ -139,12 +142,20 @@ const Dashboard = () => {
   };
 
   return (
+  <div className='Dashboard'>
     <div className='container'>
+        <header class="Header">
+          <b class='brand'>Data Magnet 🧲</b>
+          <nav>
+            <ul>
+              <li><a onClick={()=>navigate('/login')}>Login</a></li>
+            </ul>
+          </nav>
+        </header>
         <div className="first-block">
             <div className="left-panel">
                 <div className="logo">
                 {/* Replace with your actual logo image */}
-                <b className='brand'>Data Magnet 🧲</b>
                 </div>
                 <h1 className="header">Unlock the power of your Documents Data</h1>
                 <p className="description">
@@ -206,9 +217,8 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
-
-
-    </div>
+      </div>
+    </div>  
   );
 };
 

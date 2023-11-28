@@ -1,0 +1,34 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px 2vh; /* Adjust padding as needed */
+    border-bottom: 1px solid #777777;
+    margin-bottom: 2vw;
+}
+  
+.Header .brand{
+    font-size: 28px; /* Adjust font size as needed */
+    margin: 0; /* Reset margin */
+}
+  
+.Header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+  
+.Header nav ul li {
+    margin-left: 15px; /* Adjust margin between nav items */
+}
+  
+.Header nav ul li:first-child {
+    margin-left: 0; /* Remove margin for the first nav item */
+}
+  
+.Header nav ul li a {
+    text-decoration:underline;
+    font-size: 20px;
+    color: #fff; /* Set color as needed */
+}
