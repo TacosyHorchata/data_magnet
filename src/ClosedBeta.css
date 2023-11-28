@@ -156,6 +156,10 @@
   border-radius: 5px;
 }
 
+.future-features{
+  text-align: right;
+}
+
 @media screen and (max-width: 1000px) {
 
   .ClosedBeta .row{

@@ -133,25 +133,27 @@ const ClosedBeta = () => {
           </nav>
         </header>
       <h1><i>Beta 1.0</i></h1>
-      <i>If you are here, it means you are one of the choosen, choose your next steps wisely</i>
-      <h3>Data Magnet allows you to extract relevant data from your documents easily and quickly.
+      <h3 style={{textAlign:'center'}}>Data Magnet allows you to extract relevant data from your documents easily and quickly.
         Saving endless hours of manual data entry and paperwork.
       </h3>
       <p>
-        1. Upload your PDF file.
+        <b>Instructions:</b>
+        <br/>1. Upload your PDF file.
         <br />2. Specify the data you are looking for.
         <br />3. Add descriptions to each data for better results.
         <br />4. Export in CSV or JSON format.
         <br />
-        <br /><i>Convert multiple files simultaneously (Coming Soon)</i>
-        <br /><i>Upload images or .docx(Coming Soon)</i>
-        <br /><i>Save the data you wish to extract in your "Assistants" (Coming Soon)</i>
-        <br /><i>Connect to Google Sheets or via API (Coming Soon)</i>
-        <br/>
-        <br/>
-        <h4><a style={{textDecoration:'underline'}} href="mailto:miguelhaddad485@gmail.com?subject=I%20am%20ready%20to%20unlock%20the%20power%20of%20my%20docs">I am ready to unlock the power of my documents, contact me!</a></h4>
+        <div className='future-features'>
+          <br /><i>Convert multiple files simultaneously (Coming Soon)</i>
+          <br /><i>Upload images or .docx(Coming Soon)</i>
+          <br /><i>Save the data you wish to extract in your "Assistants" (Coming Soon)</i>
+          <br /><i>Connect to Google Sheets or via API (Coming Soon)</i>
+          <br/>
+          <br/>
+        </div>
+        <button className='button-convert'><a href="mailto:miguelhaddad485@gmail.com?subject=I%20am%20ready%20to%20unlock%20the%20power%20of%20my%20docs">I am ready to make my company 10X faster</a></button>
       </p>
-      <div className='row'>
+      <div style={{borderTop:'1px solid grey', paddingTop:'2vw'}} className='row'>
         <div className='col'>
           <form onSubmit={handleSubmit} id="searchForm" onDrop={handleFileDrop} encType="multipart/form-data">
             <h3><i>1. Upload your PDF file:</i></h3>
