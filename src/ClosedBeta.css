@@ -165,12 +165,11 @@
   .ClosedBeta .col{
     margin-top: 3vh;
     flex-direction: column;
-  
+    align-items: center;
   }
 
   .ClosedBeta .right-panel {
     flex:1; 
-    margin-left: 3vw;
     background-color: #1e1e1e;
     padding: 2em;
     display: flex;
@@ -178,6 +177,7 @@
     min-width: 70%;
     max-width: 70%;
     overflow-y: auto;
+    justify-content: center;
   }
 
   .ClosedBeta input[type="text"] {

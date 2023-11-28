@@ -4,7 +4,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Take full viewport height */
+    height: 60vh; /* Take full viewport height */
+    margin: 2vw;
   }
   
   .login-container {

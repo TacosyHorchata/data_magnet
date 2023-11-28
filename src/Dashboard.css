@@ -140,6 +140,8 @@ body {
 
 }
 
+/*mobile*/
+
 @media screen and (max-width: 767px) {
     /* Changes specific to mobile screens */
   
@@ -219,20 +221,22 @@ body {
       .Dashboard button {
         background-color: #000000;
         border: 1px solid rgb(189, 189, 189);
+        width: 100%;
         color: white;
         cursor: pointer;
       }
       
       .Dashboard .input-group {
         margin-bottom: 1em;
+        text-align: center;
       }
 
       .Dashboard .input-group input {
         margin-bottom: 1em;
-        width: 86.5%;
+        width: 80%;
       }
       .Dashboard .input-group button {
-        width: 100%;
+        width: 87%;
       }
       
       /* Additional CSS for code formatting */
@@ -254,7 +258,7 @@ body {
       /* Add styles for your select button */
       /* For example: */
       margin-top: 20px;
-      padding: 1.5em;
+      padding: 2em;
       background-color: #6c5ce7;
       color: white;
       border: none;

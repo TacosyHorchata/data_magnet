@@ -149,7 +149,7 @@ const ClosedBeta = () => {
         <br /><i>Connect to Google Sheets or via API (Coming Soon)</i>
         <br/>
         <br/>
-        <h4><a style={{textDecoration:'underline'}} href="miguelhaddad485@gmail.com?subject=I%20am%20ready%20to%20unlock%20the%20power%20of%20my%20docs">I am ready to unlock the power of my documents, contact me!</a></h4>
+        <h4><a style={{textDecoration:'underline'}} href="mailto:miguelhaddad485@gmail.com?subject=I%20am%20ready%20to%20unlock%20the%20power%20of%20my%20docs">I am ready to unlock the power of my documents, contact me!</a></h4>
       </p>
       <div className='row'>
         <div className='col'>

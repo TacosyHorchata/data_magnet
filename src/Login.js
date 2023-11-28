@@ -36,7 +36,7 @@ const Login = () => {
 
   return (
     <>
-    <h1 style={{margin:"2vw"}}><a href='/'>Data Magnet 🧲</a></h1>
+    <h1 style={{margin:"5vw 5vw"}}><a href='/'>Data Magnet 🧲</a></h1>
     <div className='Login'>
         <div className="login-container">
         <h2>Login</h2>
