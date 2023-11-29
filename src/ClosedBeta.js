@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ClosedBeta.css'
 import axios from 'axios';
 
 import { useAuth } from './Context/authContext';
 import { useNavigate } from 'react-router-dom'; 
 
+import { database } from './firebase.js';
+import { ref, push, update, get } from 'firebase/database';
+
 import logo_bn from './images/logo-lookup-data-magnet-blanco.svg'
+
+// Add this line where you have access to your Firebase app instance
 
 const ClosedBeta = () => {
   const [searchFields, setSearchFields] = useState([{ key: '', description: '' }]);
@@ -13,8 +18,10 @@ const ClosedBeta = () => {
   const [extractedData, setExtractedData] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [typeOutput, setTypeOutput] = useState('json')
+  const [creditsLeft, setCreditsLeft] = useState("")
+
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const handleTypeSelection = (event) =>{
     setTypeOutput(event.target.value)
@@ -61,65 +68,107 @@ const ClosedBeta = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    const searchObject = searchFields.reduce((acc, curr) => {
-      if (curr.key !== '') {
-        acc[curr.key] = curr.description;
-      }
-      return acc;
-    }, {});
+    const userCreditsRef = ref(database, `users/${user.uid}/credits`);
+    const snapshot = await get(userCreditsRef);
+    const credits = snapshot.val();
 
-    console.log('Search Object:', searchObject);
-    console.log('Uploaded Files:', files);
+    if(credits>=1 || credits===null){
 
-    const formData = new FormData();
-    formData.append('file', files[0]); // Assuming one file is being uploaded
-    formData.append('output_json', JSON.stringify(searchObject));
-
-    try {
-      const processFileResponse = await axios.post('https://camtom-docs-70b844df7cdc.herokuapp.com/process-file', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
+      const searchObject = searchFields.reduce((acc, curr) => {
+        if (curr.key !== '') {
+          acc[curr.key] = curr.description;
         }
-      });
+        return acc;
+      }, {});
 
-      if(processFileResponse.data.error){
-        alert(processFileResponse.data.error);
-        setIsLoading(false);
-        return
-      }
-      const jobId = processFileResponse.data.job_id;
-      console.log(processFileResponse.data, jobId)
+      const formData = new FormData();
+      formData.append('file', files[0]); // Assuming one file is being uploaded
+      formData.append('output_json', JSON.stringify(searchObject));
 
-      let jobStatus = 'PENDING';
+      try {
+        const processFileResponse = await axios.post('https://camtom-docs-70b844df7cdc.herokuapp.com/process-file', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
 
-      while (jobStatus !== 'finished' && jobStatus !== 'failed' && jobStatus !== 'stopped') {
-        const jobStatusResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-status/${jobId}`);
-        jobStatus = jobStatusResponse.data.status;
-        console.log(jobStatusResponse.data, jobStatus)
-
-        if (jobStatus === 'finished') {
-          const jobResultResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-result/${jobId}`);
-          const jobResult = jobResultResponse.data.result;
-          console.log('Job Result:', jobResult);
-          // Handle the successful job result here
-          setExtractedData(jobResult);
-        } else if (jobStatus === 'FAILED' || jobStatus === 'STOPPED') {
-          // Handle failure or stopped job here
-          console.error('Job failed or stopped.');
-        } else {
-          // Job is still in progress, wait for some time before checking again
-          await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds
+        if(processFileResponse.data.error){
+          alert(processFileResponse.data.error);
+          setIsLoading(false);
+          return
         }
+        const jobId = processFileResponse.data.job_id;
+        console.log(processFileResponse.data, jobId)
+
+        let jobStatus = 'PENDING';
+
+        while (jobStatus !== 'finished' && jobStatus !== 'failed' && jobStatus !== 'stopped') {
+          const jobStatusResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-status/${jobId}`);
+          jobStatus = jobStatusResponse.data.status;
+          console.log(jobStatusResponse.data, jobStatus)
+
+          if (jobStatus === 'finished') {
+            const jobResultResponse = await axios.get(`https://camtom-docs-70b844df7cdc.herokuapp.com/job-result/${jobId}`);
+            const jobResult = jobResultResponse.data.result;
+            console.log('Job Result:', jobResult);
+            // Handle the successful job result here
+            setExtractedData(jobResult);
+            
+            const currentDate = new Date().toISOString();
+            const dataToSave = {
+              ...processFileResponse.data.fileData,
+              jobResult: jobResult,
+              currentDate: currentDate,
+            };
+
+            //add request to the requests
+            const refRequest = ref(database, `requests/${user.uid}`);
+            push(refRequest, dataToSave);
+
+            //update credits
+            let updatedData;
+            if(credits===null){
+              updatedData = {
+                credits: 99 // Set 'credits' to a specific value (-1 in this case)
+              };
+            }else{
+              updatedData = {
+                credits: credits-1 // Set 'credits' to a specific value (-1 in this case)
+              };
+            }
+            const userUpdateCreditsRef = ref(database, `users/${user.uid}`);
+            update(userUpdateCreditsRef, updatedData);
+            setCreditsLeft(creditsLeft-1);
+          } else if (jobStatus === 'FAILED' || jobStatus === 'STOPPED') {
+            // Handle failure or stopped job here
+            console.error('Job failed or stopped.');
+          } else {
+            // Job is still in progress, wait for some time before checking again
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Wait for 2 seconds
+          }
+        }
+
+      } catch (error) {
+        console.error('Error:', error);
+        // Display error if there's an issue
+        alert('Error occurred while processing. Please try again.');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      // Display error if there's an issue
-      alert('Error occurred while processing. Please try again.');
+    }else{
+      alert("Insufficient credits, please contact support")
     }
 
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    async function fetchCredits(){
+      const userCreditsRef = ref(database, `users/${user.uid}/credits`);
+      const snapshot = await get(userCreditsRef);
+      setCreditsLeft(snapshot.val());
+    }
+    fetchCredits();
+    console.log(creditsLeft)
+  }, []);
 
   const isAddButtonDisabled = searchFields.length >= 10;
 
@@ -244,6 +293,7 @@ const ClosedBeta = () => {
 
         <div className='col'>
           <div className="right-panel">
+            <p>Credits: {creditsLeft}</p>
             <h2>Extracted Data</h2>
             <select className="select-dropdown" onChange={(e) => handleTypeSelection(e)}>
               <option value="json" selected>JSON</option>

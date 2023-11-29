@@ -158,7 +158,7 @@ const Dashboard = () => {
                 <div className="logo">
                 {/* Replace with your actual logo image */}
                 </div>
-                <h1 className="header">Unlock the power of your Documents Data</h1>
+                <h1 className="header">Boosting data entry<br/> 10X faster and cheaper</h1>
                 <p className="description">
                 • Save endless hours of data entry.
                 <br/>
